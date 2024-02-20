@@ -11,15 +11,19 @@
 
   <body>
     <p>
+      <% user = User.find_by({"id"=>session["user_id"]}) %>
       <!-- if no user logged-in, display signup and login links -->
-      <!-- else, if user logged-in, display user name and logout link -->
-      <a href="/users/new">Sign Up</a>
-      |
-      <a href="/login">Login</a>
-      |
-      <a href="/logout">Logout</a>
+      <% if user == nil %>
+        <a href="/users/new">Sign Up</a>
+        |
+        <a href="/login">Login</a>
+       <!-- else, if user logged-in, display user name and logout link -->
+      <%else%>
+        Hey, <%=user["first_name"]%>!   
+        |
+        <a href="/logout">Logout</a>
+      <%end%>     
     </p>
-
     <p>
       <%= flash["notice"] %>
     </p>
